@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Spectral, Archivo, Space_Grotesk } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import SiteNav from "@/components/SiteNav";
 import SiteFooter from "@/components/SiteFooter";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -47,6 +48,7 @@ export default function RootLayout({
         <main>{children}</main>
         <SiteFooter />
         <ScrollReveal />
+        <Analytics />
       </body>
     </html>
   );
