@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-ink: #161412;
+  --color-ink-soft: #4a443c;
+  --color-muted: #6b6358;
+  --color-navy: #0d102f;
+  --color-navy-hover: #1c2150;
+  --color-cyan: #33cccc;
+  --color-gold: #ffbc00;
+  --color-near-black: #14110e;
+  --font-serif: var(--font-spectral);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-space-grotesk);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: var(--color-navy);
+  color: #ffffff;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@keyframes ffmarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---- Responsive utilities ---- */
+/* Horizontal section padding: 56px desktop -> 32px tablet -> 20px phone */
+.ff-px {
+  padding-left: 56px !important;
+  padding-right: 56px !important;
+}
+@media (max-width: 860px) {
+  .ff-px {
+    padding-left: 32px !important;
+    padding-right: 32px !important;
+  }
+}
+@media (max-width: 540px) {
+  .ff-px {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+/* CSS grid sections that should collapse to 2 cols on tablet, 1 col on phone */
+@media (max-width: 860px) {
+  .ff-stack-tablet {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+@media (max-width: 640px) {
+  .ff-stack,
+  .ff-stack-tablet {
+    grid-template-columns: 1fr !important;
+  }
+  .ff-stack > *,
+  .ff-stack-tablet > * {
+    border-right: none !important;
+  }
+}
+
+/* Flex rows that should stack on phone */
+@media (max-width: 640px) {
+  .ff-flex-col {
+    flex-direction: column !important;
+  }
+}
+
+/* Prevent any element with an explicit pixel width from forcing horizontal scroll */
+@media (max-width: 640px) {
+  .ff-w-auto {
+    width: 100% !important;
+  }
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+/* ---- Nav: desktop links vs. mobile burger ---- */
+.ff-nav-links {
+  display: flex;
+}
+.ff-nav-burger {
+  display: none;
+}
+.ff-nav-mobile-panel {
+  display: none;
+}
+@media (max-width: 860px) {
+  .ff-nav-links {
+    display: none;
+  }
+  .ff-nav-burger {
+    display: flex;
+  }
+  .ff-nav-mobile-panel.open {
+    display: block;
+  }
+}
+
+/* ---- Scroll reveal: every <section> fades + rises as it enters the viewport ---- */
+.sr-ready section:not([data-sr="in"]) {
+  opacity: 0;
+  transform: translateY(64px);
+  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+.sr-ready section[data-sr="in"] {
+  opacity: 1;
+  transform: none;
+  transition: opacity 1.1s cubic-bezier(0.16, 1, 0.3, 1), transform 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sr-ready section {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}
